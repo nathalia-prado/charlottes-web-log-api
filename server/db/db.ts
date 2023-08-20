@@ -1,3 +1,6 @@
-import connection from './connection.ts'
+import { Post } from '../../models/post.ts'
+import db from './connection.ts'
 
-export function getAllPosts(db = connection) {}
+export function getAllPosts(): Promise<Post[]> {
+    return db('posts').select()
+  }
