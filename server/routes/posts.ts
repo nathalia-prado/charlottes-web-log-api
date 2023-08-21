@@ -19,4 +19,8 @@ router.patch('/:id', async(req, res) => {
     res.json(post)
 })
 
+router.delete('/:id', async(req, res) => {
+    await db.deletePost(Number(req.params.id))
+    res.sendStatus(200)
+})
 export default router
