@@ -19,3 +19,7 @@ export function updatePost(post: Post): Promise<Post> {
 export function deletePost(id: number): Promise<number> {
   return db('posts').delete().where({id})
 }
+
+export function getAllComments(id: number): Promise<Comment[]> {
+  return db('comments').select().where({post_id: id})
+}
