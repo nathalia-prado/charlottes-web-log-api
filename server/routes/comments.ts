@@ -12,4 +12,9 @@ router.patch('/:id', async(req, res) => {
     res.json(comment)
 })
 
+router.delete('/:id', async(req, res) => {
+    await db.deleteComment(Number(req.params.id))
+    res.sendStatus(200)
+})
+
 export default router

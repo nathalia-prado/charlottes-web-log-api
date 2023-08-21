@@ -17,7 +17,8 @@ export function updatePost(post: Post): Promise<Post> {
   .returning(['id','title','date_created as dateCreated', 'text'])
 }
 
-export function deletePost(id: number): Promise<number> {
+export async function deletePost(id: number): Promise<number> {
+  await deleteCommentByPostId(id)
   return db('posts').delete().where({id})
 }
 
@@ -35,4 +36,12 @@ export function updateComment(comment: Comment): Promise<Comment> {
   return db('comments').update({comment: comment.comment}).where('id', comment.id)
   .returning(['id','comment','date_posted as datePosted', 'post_id as postId'])
 
+}
+
+export function deleteComment(id: number): Promise<number> {
+  return db('comments').delete().where({id})
+}
+
+export function deleteCommentByPostId(id: number): Promise<number> {
+  return db('comments').delete().where({post_id: id})
 }
