@@ -30,4 +30,11 @@ router.get('/:id/comments', async (req, res) => {
     res.json(comments)
 })
 
+router.post('/:id/comments', async (req, res) => {
+    const newComment = {postId: Number(req.params.id), comment: req.body.comment}
+    const comments = await db.addComment(newComment)
+    res.json(comments)
+})
+
+
 export default router

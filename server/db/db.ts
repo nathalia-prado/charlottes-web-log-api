@@ -1,3 +1,4 @@
+import { CommentData } from '../../models/comment.ts'
 import { Post } from '../../models/post.ts'
 import db from './connection.ts'
 
@@ -22,4 +23,10 @@ export function deletePost(id: number): Promise<number> {
 
 export function getAllComments(id: number): Promise<Comment[]> {
   return db('comments').select().where({post_id: id})
+}
+
+export function addComment(commentData: CommentData): Promise<Comment>{
+  return db('comments')
+    .insert({comment: commentData.comment, post_id: commentData.postId, date_posted: new Date().getTime()})
+    .returning(['id','comment','date_posted as datePosted', 'post_id as postId'])
 }
