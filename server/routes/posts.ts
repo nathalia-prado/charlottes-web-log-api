@@ -7,5 +7,9 @@ router.get('/', async (req, res) => {
     res.json(posts)
   })
 
+router.post('/', async(req, res) => {
+    const post = await db.addPost(req.body)
+    res.json(post) 
+})
 
 export default router
