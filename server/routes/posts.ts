@@ -9,15 +9,15 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async(req, res) => {
-    const post = await db.addPost(req.body)
-    res.json(post) 
+    const posts = await db.addPost(req.body)
+    res.json(posts[0]) 
 })
 
 router.patch('/:id', async(req, res) => {
     const updatedPost = req.body
     updatedPost.id = req.params.id
-    const post = await db.updatePost(updatedPost)
-    res.json(post)
+    const posts = await db.updatePost(updatedPost)
+    res.json(posts[0])
 })
 
 router.delete('/:id', async(req, res) => {
@@ -33,7 +33,7 @@ router.get('/:id/comments', async (req, res) => {
 router.post('/:id/comments', async (req, res) => {
     const newComment = {postId: Number(req.params.id), comment: req.body.comment}
     const comments = await db.addComment(newComment)
-    res.json(comments)
+    res.json(comments[0])
 })
 
 

@@ -8,8 +8,8 @@ const router = express.Router()
 router.patch('/:id', async(req, res) => {
     const updatedComment = req.body
     updatedComment.id = req.params.id
-    const comment = await db.updateComment(updatedComment)
-    res.json(comment)
+    const comments = await db.updateComment(updatedComment)
+    res.json(comments[0])
 })
 
 router.delete('/:id', async(req, res) => {
