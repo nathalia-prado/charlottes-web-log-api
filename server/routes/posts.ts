@@ -12,4 +12,11 @@ router.post('/', async(req, res) => {
     res.json(post) 
 })
 
+router.patch('/:id', async(req, res) => {
+    const updatedPost = req.body
+    updatedPost.id = req.params.id
+    const post = await db.updatePost(updatedPost)
+    res.json(post)
+})
+
 export default router

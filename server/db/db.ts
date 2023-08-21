@@ -9,4 +9,9 @@ export function addPost(post: Post): Promise<Post> {
   return db('posts')
     .insert({title: post.title, text: post.text, date_created: new Date().getTime()})
     .returning(['id','title','date_created as dateCreated', 'text'])
-}  
+}
+
+export function updatePost(post: Post): Promise<Post> {
+  return db('posts').update(post).where('id', post.id)
+  .returning(['id','title','date_created as dateCreated', 'text'])
+}
